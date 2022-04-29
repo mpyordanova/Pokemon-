@@ -9,7 +9,7 @@ const cors = require("cors")
 require("dotenv").config()
 
 const server = express()
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 3000
 
 // middleware
 server.use(cors("*"))
@@ -19,10 +19,10 @@ server.use(express.json())
 server.use(bodyParser.json())
 
 // ROUTES
-server.use("/auth", authRouter)
+// server.use("/auth", authRouter)
 
 server.get("/", (req, res)=>{
-    res.status(200).json({message: "API UP!"})
+    res.status(200).json({message: "Welcome to the Pokemon App!"})
 })
 
 server.listen(PORT, ()=>{
