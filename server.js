@@ -5,6 +5,7 @@ const helmet = require("helmet")
 const cors = require("cors")
 const pokemon = require("./models/pokemon")
 
+
 // const pokeRouter = express.Router()
 //configure
 require("dotenv").config()
@@ -19,6 +20,8 @@ server.use(morgan("dev"))
 server.use(express.json())
 server.use(bodyParser.json())
 
+
+
 // create router. Imported from pokemon.js
 
 const pokeRouter = require('./models/pokemon')
@@ -27,11 +30,12 @@ const pokeRouter = require('./models/pokemon')
 server.use('/pokemon', pokeRouter)
 
 // ROUTES
-
+server.use('/pokemon/:id', pokeRouter)
 
 server.get("/", (req, res)=>{
     res.status(200).json({message: "Welcome to the Pokemon App!"})
 })
+
 
 server.listen(PORT, ()=>{
     console.log(`Server is listening at ${PORT}`)
