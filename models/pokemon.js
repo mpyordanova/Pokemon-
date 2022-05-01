@@ -11,6 +11,14 @@ const pokemon = [
     {name: "squirtle", img: "http://img.pokemondb.net/artwork/squirtle"},
     {name: "wartortle", img: "http://img.pokemondb.net/artwork/wartortle"}
  ];
+//  Capitalize the first letter
+//  
+function capitalizeName(pokemon){
+    for(let i=0; i<pokemon.length;i++)
+      pokemon[i].name = pokemon[i].name[0].toUpperCase()+ pokemon[i].name.slice(1);
+    return pokemon;
+    }
+    console.log(capitalizeName(pokemon))
 
  pokeRouter.route('/', (req, res)=>{
      res.status(200).json(pokemon)
@@ -21,16 +29,24 @@ const pokemon = [
     res.status(200).json({name: pokemon})
 })
 
-// Created this for testing purposes. It works.
+
+// add a new get route /pokemon/:id
  pokeRouter.get('/:id',(req, res)=>{
     res.status(200).json({id: req.params.id})
  })
 
- pokeRouter.put('/:name',(req, res)=>{
-res.status(200).json(`Update pokemon with Name ${res.params.name}`)
+
+// TEST
+ pokeRouter.put('/:name',capitalizeName,async(req, res)=>{
+     const body= req.body
+     res.status(200).json(`Update pokemon with Name ${res.params.name}`)
  })
 // export the router and then go to server.js to import it
 module.exports = pokeRouter;
 
 
 // Static routes always go above dinamic because express goes from top to bottom.
+
+
+// const_pokemon['name']=const_pokemon['name'].capitalize()
+// pokemon[0].name
