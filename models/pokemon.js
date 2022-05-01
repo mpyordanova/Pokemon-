@@ -20,6 +20,14 @@ function capitalizeName(pokemon){
     }
     console.log(capitalizeName(pokemon))
 
+    // Add jpg
+    function addJpg(pokemon){
+        for(let i=0; i<pokemon.length;i++)
+            pokemon[i].img = pokemon[i].img+ ".jpg";
+          return pokemon;
+          }
+          console.log(addJpg(pokemon))
+
  pokeRouter.route('/', (req, res)=>{
      res.status(200).json(pokemon)
  })
@@ -36,8 +44,8 @@ function capitalizeName(pokemon){
  })
 
 
-// TEST
- pokeRouter.put('/:name',capitalizeName,async(req, res)=>{
+// Changed the names with capital letters. OMG it took 2 days.
+ pokeRouter.put('/:name',capitalizeName, addJpg, async(req, res)=>{
      const body= req.body
      res.status(200).json(`Update pokemon with Name ${res.params.name}`)
  })
@@ -48,5 +56,3 @@ module.exports = pokeRouter;
 // Static routes always go above dinamic because express goes from top to bottom.
 
 
-// const_pokemon['name']=const_pokemon['name'].capitalize()
-// pokemon[0].name
