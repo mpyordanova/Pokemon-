@@ -28,7 +28,7 @@ function capitalizeName(pokemon){
           }
           console.log(addJpg(pokemon))
 
- pokeRouter.route('/', (req, res)=>{
+ pokeRouter.get('/', (req, res)=>{
      res.status(200).json(pokemon)
  })
  pokeRouter.post("/", (req, res)=>{

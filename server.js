@@ -4,7 +4,7 @@ const morgan = require("morgan")
 const helmet = require("helmet")
 const cors = require("cors")
 const pokemon = require("./models/pokemon")
-
+const mongoConfig = require ("./config")
 
 // const pokeRouter = express.Router()
 //configure
@@ -38,5 +38,6 @@ server.get("/", (req, res)=>{
 
 
 server.listen(PORT, ()=>{
+    mongoConfig()
     console.log(`Server is listening at ${PORT}`)
 })
