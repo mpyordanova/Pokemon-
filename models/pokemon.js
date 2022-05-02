@@ -49,6 +49,18 @@ function capitalizeName(pokemon){
      const body= req.body
      res.status(200).json(`Update pokemon with Name ${res.params.name}`)
  })
+// Add new pokemon.Not sure if its working yet.
+pokeRouter.post('/models/pokemon',(req, res)=>{
+    const formBody = req.body
+    pokemon.push(formBody.name)
+    res.status(200).json({name:Stretosaur})
+})
+
+
+
+
+
+
 // export the router and then go to server.js to import it
 module.exports = pokeRouter;
 
