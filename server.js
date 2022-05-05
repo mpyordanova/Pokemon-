@@ -3,8 +3,12 @@ const bodyParser = require("body-parser")
 const morgan = require("morgan")
 const helmet = require("helmet")
 const cors = require("cors")
-const pokemon = require("./models/pokemon")
+const pokemon = require("./routes/pokemon")
+const pokeRouter = require('./routes/pokemon')
 const mongoConfig = require ("./config")
+const pokeModel = require ('./schema/pokeSchema');
+const seedRouter = require('./routes/seed');
+const clearRouter = require('./routes/clear') 
 
 // const pokeRouter = express.Router()
 //configure
@@ -21,13 +25,22 @@ server.use(express.json())
 server.use(bodyParser.json())
 
 
-
 // create router. Imported from pokemon.js
 
-const pokeRouter = require('./models/pokemon')
+
+
+// do we import the schema or the model? ln 8?
+
+const {schema} = require("./schema/pokeSchema")
+
+
 
 // link the routes we created in pokemon.js
+// Do we use the path or the router name is just fine?
+// server.use(pokeRouter) or 
 server.use('/pokemon', pokeRouter)
+server.use('/seed', seedRouter)
+server.use('/clear', clearRouter)
 
 // ROUTES
 server.use('/pokemon/:id', pokeRouter)
@@ -36,6 +49,9 @@ server.get("/", (req, res)=>{
     res.status(200).json({message: "Welcome to the Pokemon App!"})
 })
 
+
+
+/
 
 server.listen(PORT, ()=>{
     mongoConfig()

@@ -1,6 +1,7 @@
 const express = require("express")
 const pokeRouter = express.Router()
-
+// schema import
+const Pokemon = require('../schema/pokeSchema')
 
 const pokemon = [
     {name: "bulbasaur", img: "http://img.pokemondb.net/artwork/bulbasaur"},
@@ -31,11 +32,13 @@ function capitalizeName(pokemon){
  pokeRouter.get('/', (req, res)=>{
      res.status(200).json(pokemon)
  })
+ 
  pokeRouter.post("/", (req, res)=>{
     const formBody= req.body
     pokemon.push(formBody.name)
     res.status(200).json({name: pokemon})
 })
+
 
 
 // add a new get route /pokemon/:id
@@ -50,16 +53,23 @@ function capitalizeName(pokemon){
      res.status(200).json(`Update pokemon with Name ${res.params.name}`)
  })
 // Add new pokemon.Not sure if its working yet.
-pokeRouter.post('/models/pokemon',(req, res)=>{
+pokeRouter.post('/add',(req, res)=>{
     const formBody = req.body
     pokemon.push(formBody.name)
-    res.status(200).json({name:Stretosaur})
+    res.status(200).json({name:"Stretosaur"})
 })
 
-
-
-
-
+// Create new pokemon
+pokeRouter.post("/new", (req, res) => {
+const newPokemon = req.body
+Pokemon.create(newPokemon, (err, pokemon)=>{
+    if(err){
+        res.status(400).json({message:err.message})
+    }else{
+        res.status(200).json({pokemon})
+    }
+})
+})
 
 // export the router and then go to server.js to import it
 module.exports = pokeRouter;
