@@ -10,7 +10,7 @@ const pokeModel = require ('./schema/pokeSchema');
 const seedRouter = require('./routes/seed');
 const clearRouter = require('./routes/clear') 
 
-// const pokeRouter = express.Router()
+
 //configure
 require("dotenv").config()
 
@@ -24,20 +24,8 @@ server.use(morgan("dev"))
 server.use(express.json())
 server.use(bodyParser.json())
 
-
-// create router. Imported from pokemon.js
-
-
-
-// do we import the schema or the model? ln 8?
-
 const {schema} = require("./schema/pokeSchema")
 
-
-
-// link the routes we created in pokemon.js
-// Do we use the path or the router name is just fine?
-// server.use(pokeRouter) or 
 server.use('/pokemon', pokeRouter)
 server.use('/seed', seedRouter)
 server.use('/clear', clearRouter)
@@ -49,9 +37,6 @@ server.get("/", (req, res)=>{
     res.status(200).json({message: "Welcome to the Pokemon App!"})
 })
 
-
-
-/
 
 server.listen(PORT, ()=>{
     mongoConfig()

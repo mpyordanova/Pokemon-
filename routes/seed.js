@@ -16,9 +16,34 @@ seedRouter.post('/', (req, res)=>{
             res.status(400).json({message: err.message})
         
         }else {
-            res.status(201).json({pokemon})
+            res.status(200).json({pokemon})
         }
     })
 })
 
+// crete new pokemon. Could not add it from postman?!
+seedRouter.post("/new", (req, res) => {
+const newPokemon = req.body
+    pokeModel.create({name: "Stretosaur", img: "http://img.pokemondb.net/artwork/charmander"}, (err, pokemon)=>{
+        if(err){
+            res.status(400).json({message:err.message})
+        }else{
+            res.status(201).json({pokemon})
+        }
+    })
+    })
+    
+    seedRouter.put('/update/:img', (req, res)=>{
+        const img = new img(req.params.img)
+        updatedPoke = req.body
+pokeModel.updateOne(img,updatedPoke,{new:true},(err, updatedPoke)=>{
+    if(err){
+        res.status(404).json({message:err.message})
+    }else{
+        res.status(202).json(updatedPoke)
+    }
+})
+    })
+
+    
 module.exports = seedRouter;

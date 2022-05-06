@@ -66,7 +66,7 @@ Pokemon.create(newPokemon, (err, pokemon)=>{
     if(err){
         res.status(400).json({message:err.message})
     }else{
-        res.status(200).json({pokemon})
+        res.status(201).json({pokemon})
     }
 })
 })
