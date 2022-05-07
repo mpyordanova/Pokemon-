@@ -43,7 +43,7 @@ function capitalizeName(pokemon){
 
 // add a new get route /pokemon/:id
  pokeRouter.get('/:id',(req, res)=>{
-    res.status(200).json({id: req.params.id})
+    res.status(200).json({_id: req.params.id})
  })
 
 
@@ -71,10 +71,35 @@ Pokemon.create(newPokemon, (err, pokemon)=>{
 })
 })
 
+
+
+pokeRouter.delete('/:id',(req, res)=>{
+    Pokemon.deleteOne({_id: req.params.id},
+        (err)=>{
+            if(err){
+                res.status(404).json({message: err.message})
+            }else{
+                res.status(204).json({})
+            }
+        }
+    )
+})
+
+// find by id 
+pokeRouter.get(":/id", (req, res)=>{
+    const id = req.params.id
+    Pokemon.findById(id, (err, pokemon)=>{
+        if(err){
+            res.status(404).json({message: err. message})
+        }else{
+            res.status(200).json(pokemon)
+        }
+    })
+})
 // export the router and then go to server.js to import it
 module.exports = pokeRouter;
 
 
 // Static routes always go above dinamic because express goes from top to bottom.
-
+// if I want to update or delete one pokemon should do it from here.
 

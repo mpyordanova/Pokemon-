@@ -16,18 +16,9 @@ clearRouter.delete("/", (req, res)=>{
 
 })
 
-clearRouter.delete('/:id',(req, res)=>{
-    pokemon.deleteOne(
-        (err)=>{
-            if(err){
-                res.status(404).json({message: err.message})
-            }else{
-                res.status(204).json({})
-            }
-        }
-    )
-})
 
 
 
 module.exports = clearRouter;
+
+// deletes everything. If I want to delete one pokemon I should do it from pokemon route

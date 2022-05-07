@@ -31,7 +31,7 @@ server.use('/seed', seedRouter)
 server.use('/clear', clearRouter)
 
 // ROUTES
-server.use('/pokemon/:id', pokeRouter)
+server.use('/pokemon', pokeRouter)
 
 server.get("/", (req, res)=>{
     res.status(200).json({message: "Welcome to the Pokemon App!"})
